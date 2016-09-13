@@ -61,7 +61,7 @@ def threadsFor(Work):
 
 		[ thread.join() for thread in Threads ]
 
-	print(reset % now())
+	print(reset % now(), flush=True)
 
 
 def push(Passed,*args):

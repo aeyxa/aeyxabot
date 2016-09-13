@@ -25,18 +25,10 @@ def loop(x):
 	"""
 
 	try:
-		show = '[SLEEP] %s seconds.'
-
-
-		if x is 1:
-			show=show[:-2]+'.'
-
-
-		print(show % x)
-
+		
 		[ use(x) for use in [sleep,check] ]
 
-	except KeyboardInterrupt: print('[CLOSE] %s' % now())
+	except KeyboardInterrupt: print('[CLOSE] %s' % now(), flush=True)
 
 
 def main():
@@ -44,7 +36,7 @@ def main():
 	Displays current time then goes to check above. 
 	"""
 
-	print('\n[CHECK] %s' % now())
+	print('\n[CHECK] %s' % now(), flush=True)
 
 	check(0)
 
