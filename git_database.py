@@ -280,6 +280,9 @@ class Database:
 
 		self.connect()
 
+		# Trash is the only table not currently being created by Laravel
+#		database.create_table(Trash)
+
 		#2
 		[ Trash(created_at=now(),Set=title,Sentence=sentence,ip=IP).save() ]
 
