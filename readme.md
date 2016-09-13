@@ -28,7 +28,11 @@ For this example we will pretend that our user searched wikipedia.com/wiki/aeyxa
 
 ```
 
-This is some content on the page. This is a random example. This page contains random information regarding a random topic. This topic is explained in detail by the content on the page. This is a final sentence for the fake wikipedia page.
+This is some content on the page. 
+This is a random example. 
+This page contains random information regarding a random topic. 
+This topic is explained in detail by the content on the page. 
+This is a final sentence for the fake wikipedia page.
 
 ```
 
