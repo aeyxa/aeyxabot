@@ -12,92 +12,135 @@
 
 Additionally, if you're reviewing or using this package along side the laravel website aeyxa.com, make sure you have the server time set to UTC. Otherwise, Carbon may get dates incorrect due to different timezone issues.
 
+
+---
+
+
 ## Overview
 The overall purpose of the python section for this project, involves creating note cards automatically for users, who have specified a wikipedia url they wish to study.
 
 ---
+
 
 ## Logic
 The overall logic behind this project is that the user submits a url, the url gets saved into a database. The url then gets searched, the content is pulled, the content is split into sentences. Then the sentences are matched against a list of regular expressions. The sentences which are matched, are split into the group that itself is matched against, and the entire sentence. The matched sentence becomes the front of the card and the back of the card is the full sentence.
 
 ---
 
+
+
 ## Example
 
-User searches: 
+For this example we will pretend that our user searched wikipedia.com/wiki/aeyxa and that the content on that page is:
 
-wikipedia.com/wiki/something
-
-String result:
+```
 
 This is some content on the page. This is a random example. This page contains random information regarding a random topic. This topic is explained in detail by the content on the page. This is a final sentence for the fake wikipedia page.
 
+```
+
 ---
+
 
 So, a web crawler goes out and fetchs the content. Then it creates a list containing each of the sentences:
 
-`['This is some content on the page.','This is a random example.', 'This page contains random information regarding a random topic.', 'This topic is explained in detail by the content on the page.', 'This is a final sentence for the fake wikipedia page.']`
+```
+
+['This is some content on the page.','This is a random example.', 'This page contains random information regarding a random topic.', 'This topic is explained in detail by the content on the page.', 'This is a final sentence for the fake wikipedia page.']
+
+```
 
 ---
 
+
 Now, each of these sentenced are matched against a list of regular expressions. By default the main regular expression which is checked is:
 
-`r'(.*?\s\b\w+ed\b.*?\s\b(by|in|on|as|is|to|the)\b\s)'`
+```
+
+r'(.*?\s\b\w+ed\b.*?\s\b(by|in|on|as|is|to|the)\b\s)'
+
+```
 
 We check for any word at the beginning, then a word ending in [ed] then a group of common prepositions.
 
 ---
 
+
 Any sentences that are matched, are put into a new list. In the example given above, the only sentence which would be matched in this case is the fourth sentence in the list:
 
-`This topic is explained in detail by the content on the page.`
+```
+
+This topic is explained in detail by the content on the page.
+
+```
 
 
 The regular expression is matched, then splits the sentence into a list containing both the full sentence in a single list.
 
 Once more, in our example the list that would be created is:
 
+```
 
-`['This topic is explained in?','This topic is explained in detail by the content on the page.']`
+['This topic is explained in?','This topic is explained in detail by the content on the page.']
+
+```
 
 Now this list gets saved into the database, and it is served to the user. The first part of the list (the part with the ?) is added as the front of the note card, and the full sentence is added onto the back.
 
 ---
 
+
 If a user feels they can make the card better, they can update the card. Once the card is updated, it gets passed on to the database. Then it's cycled through and a new regular expression is created based on the change the user made and is added to the database for further use when cards get created in the future.
 
 For example, our user gets our note card from above and decides they want to change it from:
 
-`"This topic is explained in?" => TO => "This topic is explained in detail by?"`
+```
+
+"This topic is explained in?" => TO => "This topic is explained in detail by?"
+
+```
 
 First, a new list is created and added to the database, containing the full sentence and the new updated card front.
 
 The list would now look like:
 
-`['This topic is explained in detail by?', 'This topic is explained in detail by the content on the page.']`
+```
+
+['This topic is explained in detail by?', 'This topic is explained in detail by the content on the page.']
+
+```
 
 ---
+
 
 Now, this gets saved in the database, and the Brain.py file is able to take this list and created a new regular expression.
 
 The Brain.py file would take this list, and push the two parts together into one new string:
 
-`'This topic is explained in detail by? the content on the page.'`
+```
 
+'This topic is explained in detail by? the content on the page.'
 
+```
 
 Now, this sentence is looped over against a list of regular expressions containing common prepositions. 
 
 ---
 
+
 In this example, a new regular expression would be created for the sentence, that regular expression would come out as:
 
-`((\w*\s?.*?\bis\b\b\w+ed\b.*?\bis\b.*?\bby\b).*?\bthe\b.*?\bon\b.*?\bthe\b)`
+```
+
+((\w*\s?.*?\bis\b\b\w+ed\b.*?\bis\b.*?\bby\b).*?\bthe\b.*?\bon\b.*?\bthe\b)
+
+```
 
 
 Notice how it replaces the **'?' with a ')'** allowing for only that group to be captured to be used as the front of the card in the future.
 
 ---
+
 
 This regular expression is saved in the database and can be used right away against any new groups of text which are matched against the regular expression. The regular expression will only match if all the preposition words in the regular expression are present or more. The main benefit of this is so that the program continues to learn new regular expressions without the new expressions needing to be created by hand and added to the database.
 
@@ -105,6 +148,10 @@ There are other implementions that will be happening in the future for this syst
 
 
 ---
+
+
+
+
 
 #PYTHON FILES							
 
