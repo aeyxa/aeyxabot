@@ -130,7 +130,7 @@ class Database:
 		if len(check) > 0:
 
 			#6
-			print(start % now())
+			print(start % now(), flush=True)
 
 			#7
 			learned = self.remember()
@@ -225,7 +225,7 @@ class Database:
 
 		x = now(),now()
 
-		print(out % x)
+		print(out % x, flush=True)
 
 		self.close()
 
@@ -247,11 +247,13 @@ class Database:
 
 		#1 Only errors out if no matches were found in Parse.py
 		try:
+
 			front = ''.join(x[0])
 			back = ''.join(x[1])
 			IP = ''.join(x[2])
 			title = ''.join(x[3])
-		except: return False, print(error1)
+
+		except: return False, print(error1, flush=True)
 
 		#2
 		[ Card(created_at=now(),Set=title,Front=front,Back=back,Priority=0,ip=IP).save() ]
@@ -273,10 +275,12 @@ class Database:
 
 		#1
 		try:
+
 			sentence = ''.join(x[0])
 			IP = ''.join(x[1])
 			title = ''.join(x[2])
-		except: return False, print(error1)
+
+		except: return False, print(error1, flush=True)
 
 		self.connect()
 
