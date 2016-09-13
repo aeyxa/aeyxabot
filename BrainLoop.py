@@ -28,7 +28,7 @@ def loop(x):
 		
 		[ use(x) for use in [sleep,check] ]
 
-	except KeyboardInterrupt: print('[CLOSE] %s' % now(), flush=True)
+	except KeyboardInterrupt: print('\n[BRAIN]\n[CLOSE] %s' % now(), flush=True)
 
 
 def main():
@@ -36,7 +36,7 @@ def main():
 	Displays current time then goes to check above. 
 	"""
 
-	print('\n[CHECK] %s' % now(), flush=True)
+	print('\n[BRAIN]\n[CHECK] %s' % now(), flush=True)
 
 	check(0)
 
