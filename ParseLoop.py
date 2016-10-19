@@ -4,38 +4,38 @@ from database import *
 from time import sleep
 
 def check(x):
-	"""
-	Checks if database has a job to do if not, then pass
-	x to LoopLogic whichs a simple incremental algorithm.
-	"""
+    """
+    Checks if database has a job to do if not, then pass
+    x to LoopLogic whichs a simple incremental algorithm.
+    """
 
-	queue = Database(None).urls()
+    queue = Database(None).urls()
 
-	if queue is False:
-		loop(Logic(x).do())
+    if queue is False:
+        loop(Logic(x).do())
 
-	else: main()
+    else: main()
 
 
 def loop(x):
-	"""
-	Displays sleep timer and goes back to check above.
-	"""
+    """
+    Displays sleep timer and goes back to check above.
+    """
 
-	try:
+    try:
 
-		[ use(x) for use in [sleep,check] ]
+        [ use(x) for use in [sleep,check] ]
 
-	except KeyboardInterrupt: print('\n[PARSE]\n[CLOSE] %s' % now(), flush=True)
+    except KeyboardInterrupt: print('\n[PARSE]\n[CLOSE] %s' % now(), flush=True)
 
 
 def main():
-	"""
-	Displays current time then goes to check above.
-	"""
+    """
+    Displays current time then goes to check above.
+    """
 
-	print('\n[PARSE]\n[CHECK] %s' % now(), flush=True)
-	check(0)
+    print('\n[PARSE]\n[CHECK] %s' % now(), flush=True)
+    check(0)
 
 
 main()
