@@ -11,26 +11,26 @@ def check(x):
 
 	queue = Database(None).urls()
 
-	if queue is False: 
+	if queue is False:
 		loop(Logic(x).do())
-	
+
 	else: main()
 
 
 def loop(x):
-	""" 
+	"""
 	Displays sleep timer and goes back to check above.
 	"""
 
 	try:
-		
+
 		[ use(x) for use in [sleep,check] ]
 
 	except KeyboardInterrupt: print('\n[PARSE]\n[CLOSE] %s' % now(), flush=True)
 
 
 def main():
-	""" 
+	"""
 	Displays current time then goes to check above.
 	"""
 

@@ -29,16 +29,16 @@ class Parse:
 		try:
 			page = BeautifulSoup(urlopen(self.url), "html.parser")
 
-		except: 
+		except:
 			print('[ERROR] Invalid URL')
 			return False
 
-		
+
 		Content = [ text.get_text() for text in page.findAll('p') ]
 		self.title = ''.join([ title.get_text() for title in page.findAll('h1')])
 		text = [ re.sub(unwanted,'',each) for each in Content ]
 		self.Sentences = [ re.findall(replace, re.sub(spaces,nl,each)) for each in text ]
-		
+
 		return self.parse()
 
 
@@ -48,25 +48,25 @@ class Parse:
 		match the list against the sentence. If a match is found, create a new variable called x and
 		find the regular expression match in the sentence. Then create a new list which contains the
 		match and the full sentence.
-		
+
 		Example -> 'The best random example ever created by any human in existance.'
 
 		Outputs -> [
-		              'The best random example ever created by?', 
+		              'The best random example ever created by?',
 		              'The best random example ever created by any human in existance.'
 		           ]
 		"""
-		
-		
+
+
 		RegexList, Content = push(self.custom,[Default]), push(self.Sentences)
-		
-		self.Find =	[	
-						[x.group(1).strip()+'?',i,self.ip,self.title] 
-						for i in Content for regex in RegexList 
-						if re.compile(regex).match(i) 
+
+		self.Find =	[
+						[x.group(1).strip()+'?',i,self.ip,self.title]
+						for i in Content for regex in RegexList
+						if re.compile(regex).match(i)
 						for x in [re.search(regex,i)]
 					]
-		
+
 		return self.recycle()
 
 
@@ -85,11 +85,8 @@ class Parse:
 
 		#2
 		discard = [ [i,self.ip,self.title] for i in push(self.Sentences) if i not in Found ]
-		
+
 		#3
 		Paired = [ self.Find,discard ]
-		
+
 		return Paired
-
-
-

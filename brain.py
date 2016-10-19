@@ -38,20 +38,20 @@ class Brain:
 			the card updated by the user. Then, match that variable against the back of the
 			card which held the entire sentence. Create a new variable which has merged the
 			two front and back together.
-			
+
 			match  ->  This is a?
 			one    ->  This is a very important sentence.
 			x      ->  This is a? very important sentence.
 		"""
 
-		#2	
+		#2
 		match = ''.join(material[:1])
-		
+
 		concept = [ x for one in material[1:2] for x in [re.sub(match, match, one)] ]
 
 		self.learn(''.join(concept),''.join(material[1:2]))
 
-	
+
 	def learn(self,concept,sentence):
 		"""
 		#3 -> Search through each in Knowledge make a list of each regex match in the sentence.
@@ -70,15 +70,15 @@ class Brain:
 
 		#3
 		MatchList = [ x for word in concept.split() for x in Knowledge if re.search(x,word)]
-		
+
 		#4
 		MatchList.insert(0,r'((\w*\s?)')
 		MatchList = ''.join(MatchList)
-		
+
 		#5
 		NewRegex = re.sub(r'(\)\()','.*?',MatchList)
 		NewRegex = re.sub(r'([.]\*\?\\\?)',')',NewRegex)
-		
+
 		self.validate(NewRegex,sentence)
 
 
@@ -109,6 +109,3 @@ class Brain:
 				self.sentence = sentence
 
 		else: return
-
-
-
