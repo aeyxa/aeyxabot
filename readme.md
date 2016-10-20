@@ -41,7 +41,7 @@ So, a web crawler goes out and fetchs the content. Then it creates a list contai
 ```
 
 [
-  'This is some content on the page.', 
+	'This is some content on the page.', 
 	'This is a random example.', 
 	'This page contains random information regarding a random topic.', 
 	'This topic is explained in detail by the content on the page.', 
