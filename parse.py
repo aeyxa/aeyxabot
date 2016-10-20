@@ -60,7 +60,7 @@ class Parse:
 
         RegexList, Content = push(self.custom,[Default]), push(self.Sentences)
 
-        self.Find =	[
+        self.Find = [
                         [x.group(1).strip()+'?',i,self.ip,self.title]
                         for i in Content for regex in RegexList
                         if re.compile(regex).match(i)
